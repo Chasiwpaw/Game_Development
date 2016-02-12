@@ -12,19 +12,19 @@ public class Player {
 		this.playerMove = new Scanner(System.in);
 	}
 	
-	String getPlayerNumber(){
+	public String getPlayerNumber(){
 		return playerName;
 	}
 	
-	int getCoinNumber(){
+	public int getCoinNumber(){
 		return coinNumber;
 	}
 	
-	String getPlayerMove(){
+	public String getPlayerMove(){
 		return coinCoordinate;
 	}
 	
-	void setPlayerMove(){
+	public void setPlayerMove(){
 		coinCoordinate = playerMove.nextLine();
-	}
+	}	
 }
