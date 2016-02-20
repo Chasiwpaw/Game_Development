@@ -1,6 +1,6 @@
 public class Board {
-	private int width;
-	private int length;
+	private int row;
+	private int column;
 	private char[] letterCoordinate = null;
 //	private int[] numberCoordinate = null;
 	private int[][] gameBoard = null;
@@ -9,18 +9,18 @@ public class Board {
 		this(5,5);
 	}
 	
-	Board(int width,int length){
-		this.width = width;
-		this.length = length;
-		this.gameBoard = new int[this.width][this.length];
+	Board(int row,int column){
+		this.row = row;
+		this.column = column;
+		this.gameBoard = new int[this.row][this.column];
 //		this.numberCoordinate = numberArrayCreator();
 		this.letterCoordinate = letterArrayCreator();
 	}
 	
 	private char[] letterArrayCreator() {
 		int asciiValueForArray = 65;
-		letterCoordinate = new char[getBoardLength()];
-		for (int letterIndex = 0; letterIndex<getBoardLength(); letterIndex++) {
+		letterCoordinate = new char[getBoardColumnLength()];
+		for (int letterIndex = 0; letterIndex<getBoardColumnLength(); letterIndex++) {
 			letterCoordinate[letterIndex] = (char) asciiValueForArray;
 			asciiValueForArray++;
 		}
@@ -47,8 +47,8 @@ public class Board {
 //	}
 	
 	public void startingBoard(){
-		for(int i=0;i>getBoardWidth();i++){
-			for(int j=0;j>getBoardLength();j++){
+		for(int i=0;i>getBoardRowLength();i++){
+			for(int j=0;j>getBoardColumnLength();j++){
 				gameBoard[i][j]=1;
 			}
 		}
@@ -57,13 +57,13 @@ public class Board {
 	public void printBoard(){
 		int asciiValue = 65;
 //		int sideBoardCoordinate = getBoardWidth();
-		for(int i=0;i<getBoardWidth();i++){
-			for(int j=0;j<getBoardLength();j++){
-				System.out.print("["+getBoardPositionValue(i,j) + "]");
+		for(int rowIndex=getBoardRowLength()-1;rowIndex>=0;rowIndex--){
+		for(int columnIndex=0;columnIndex<getBoardColumnLength();columnIndex++){
+				System.out.print("["+getBoardPositionValue(rowIndex,columnIndex) + "]");
 			}
 			System.out.println();
 		}
-		for(int k=0;k<getBoardLength();k++){
+		for(int k=0;k<getBoardColumnLength();k++){
 			System.out.print(" "+((char)asciiValue++)+" ");
 		}
 		System.out.println();
@@ -79,39 +79,39 @@ public class Board {
 //		System.out.println();
 	}
 	
-	public int getBoardWidth(){
-		return width;
+	public int getBoardRowLength(){
+		return row;
 	}
 	
-	public int getBoardLength(){
-		return length;
+	public int getBoardColumnLength(){
+		return column;
 	}
 	
-	public int getBoardPositionValue(int i, int j){
-		return gameBoard[i][j];
+	public int getBoardPositionValue(int rowIndex, int columnIndex){
+		return gameBoard[rowIndex][columnIndex];
 	}
 	
 	public int[][] getBoard(){
 		return gameBoard;
 	}
 	
-	public void setBoardPositionValue(int horizontalIndex, int verticalIndex, int coordinateValue){
-		gameBoard[horizontalIndex][verticalIndex]=coordinateValue;
+	public void setBoardPositionValue(int rowIndex, int columnIndex, int coordinateValue){
+		gameBoard[rowIndex][columnIndex]=coordinateValue;
 	}
-	
+
 	public int userInputConverter(String horizontalCoordinate) {
 		for (int horizontalIndex = 0; horizontalIndex < letterCoordinate.length; horizontalIndex++) {
-			if (String.valueOf(letterCoordinate[horizontalIndex]) == horizontalCoordinate) {
+			if (String.valueOf(letterCoordinate[horizontalIndex]).equals(horizontalCoordinate)) {
 				return horizontalIndex;
 			}
 		}
 		return -1;
 	}
 	
-	public int setCoinPermission(int horizontalIndex){
-		for(int verticalIndex=0; verticalIndex<getBoardWidth(); verticalIndex++){
-			if(getBoardPositionValue(horizontalIndex, verticalIndex)==0){
-				return verticalIndex;
+	public int setCoinPermission(int columnIndex){
+		for(int rowIndex=0; rowIndex<getBoardRowLength(); rowIndex++){
+			if(getBoardPositionValue(rowIndex, columnIndex)==0){
+				return rowIndex;
 			}
 		}
 		return -1;
