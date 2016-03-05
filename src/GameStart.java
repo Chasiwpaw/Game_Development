@@ -33,23 +33,25 @@ public class GameStart {
 		// Set player Name
 		firstPlayerName = nameSetter(1);
 		secondPlayerName = nameSetter(2);
-		board.startingBoard();
-		board.printBoard();
 		firstPlayer = new Player(firstPlayerName, 1);
 		secondPlayer = new Player(secondPlayerName, 2);
+		board.startingBoard();
+		board.printBoard();
 		
 		System.out.println("Select a Letter shown on the Board");
-		board.setBoardPositionValue(2, 0, 1);
-		board.setBoardPositionValue(2, 2, 1);
-		board.setBoardPositionValue(2, 3, 1);
-		board.setBoardPositionValue(2, 4, 1);
-		board.setBoardPositionValue(3, 0, 1);
-		board.setBoardPositionValue(3, 1, 1);
-		board.setBoardPositionValue(3, 2, 1);
-		board.setBoardPositionValue(3, 3, 1);
-		board.printBoard();
-		if(gameTools.checkColumnWin(board, firstPlayer)){
-			System.out.println(firstPlayer.getPlayerName()+" wins!");
+		while(true){
+			playerMoveSetter(firstPlayer);
+			if(gameTools.isGameEnded(board, firstPlayer)){
+				System.out.println("Player \"" + firstPlayer.getPlayerName()
+				+ "\" win!");
+				break;
+			}
+			playerMoveSetter(secondPlayer);
+			if(gameTools.isGameEnded(board, secondPlayer)){
+				System.out.println("Player \"" + secondPlayer.getPlayerName()
+				+ "\" win!");
+				break;
+			}
 		}
 	}
 	
@@ -71,13 +73,14 @@ public class GameStart {
 			System.out.println("Your input is invalid, please enter a valid coordinate.");
 			playerMoveSetter(player);
 		}
+		System.out.println(horizontalIndex);
 		int verticalIndex = board.setCoinPermission(horizontalIndex);
 		if(verticalIndex == -1){
 			System.out.println("The column you have chosen is full, please pick a new column to place your coin.");
 			playerMoveSetter(player);
 		}
-		board.setBoardPositionValue(horizontalIndex, verticalIndex, player.getCoinNumber());
-//		gameTools.isGameEnded(board, player);
+		board.setBoardPositionValue(verticalIndex, horizontalIndex, player.getCoinNumber());
+		board.printBoard();
 	}
 	
 	private static String nameSetter(int playerId) {
@@ -87,7 +90,7 @@ public class GameStart {
 		if (playerOrder.equals("")) {
 			return nameSetter(playerId);
 		}
-		if (firstPlayerName != null && firstPlayerName.equals(playerOrder)) {
+		if (null != firstPlayerName && firstPlayerName.equals(playerOrder)) {
 			System.out.println("Invalid Name, cannot have the same name as First Player!");
 			return nameSetter(playerId);
 		}

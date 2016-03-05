@@ -117,6 +117,15 @@ public class Board {
 		return -1;
 	}
 	
+	public boolean hasReached4thColumn(){
+		for(int columnIndex=0; columnIndex<getBoardColumnLength(); columnIndex++){
+			if(getBoardPositionValue(3, columnIndex)!=0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 //	void createBoardInstance(){
 //		gameBoard=new int[width][length];
 //	}
