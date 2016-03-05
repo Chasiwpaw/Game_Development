@@ -12,7 +12,7 @@ public class Player {
 		this.playerMove = new Scanner(System.in);
 	}
 	
-	public String getPlayerNumber(){
+	public String getPlayerName(){
 		return playerName;
 	}
 	
