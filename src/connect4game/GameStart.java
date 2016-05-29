@@ -1,3 +1,4 @@
+package connect4game;
 import java.util.Scanner;
 
 public class GameStart {
@@ -6,16 +7,16 @@ public class GameStart {
 	private static int length;
 	private static Board board;
 	private static Scanner answer;
-	private static Scanner boardSizeScanner;
+//	private static Scanner boardSizeScanner;
 	private static String firstPlayerName = null;
 	private static String secondPlayerName = null;
 	private static Player firstPlayer;
 	private static Player secondPlayer;
 	private static GameTools gameTools = new GameTools();
-
+	
 	public static void main(String[] args) {
 		answer = new Scanner(System.in);
-		boardSizeScanner = new Scanner(System.in);
+//		boardSizeScanner = new Scanner(System.in);
 		System.out.println("Welcome to game Connect 4!");
 		System.out.println();
 		System.out.println("Would you like to set the size of the board? (yes/no)");
@@ -31,10 +32,10 @@ public class GameStart {
 		}
 		
 		// Set player Name
-		firstPlayerName = nameSetter(1);
-		secondPlayerName = nameSetter(2);
-		firstPlayer = new Player(firstPlayerName, 1);
-		secondPlayer = new Player(secondPlayerName, 2);
+		firstPlayerName = nameSetter(1, answer);
+		secondPlayerName = nameSetter(2, answer);
+		firstPlayer = new Player(firstPlayerName, 1, answer);
+		secondPlayer = new Player(secondPlayerName, 2, answer);
 		board.startingBoard();
 		board.printBoard();
 		
@@ -57,7 +58,7 @@ public class GameStart {
 	
 	private static int boardSizeSetter(String sizeName) {
 		System.out.println("Enter the size of the " + sizeName + "(must be a number from 4 to 10):");
-		int size = boardSizeScanner.nextInt();
+		int size = answer.nextInt();
 		if (!(size >= 4 && size <= 10)) {
 			return boardSizeSetter(sizeName);
 		}
@@ -83,16 +84,16 @@ public class GameStart {
 		board.printBoard();
 	}
 	
-	private static String nameSetter(int playerId) {
+	private static String nameSetter(int playerId, Scanner nameScanner) {
 		System.out.println("Please Enter a Name for Player " + playerId);
-		Scanner nameScanner = new Scanner(System.in);
+//		Scanner nameScanner = new Scanner(System.in);
 		String playerOrder = nameScanner.nextLine();
 		if (playerOrder.equals("")) {
-			return nameSetter(playerId);
+			return nameSetter(playerId, nameScanner);
 		}
 		if (null != firstPlayerName && firstPlayerName.equals(playerOrder)) {
 			System.out.println("Invalid Name, cannot have the same name as First Player!");
-			return nameSetter(playerId);
+			return nameSetter(playerId, nameScanner);
 		}
 		return playerOrder;
 	}

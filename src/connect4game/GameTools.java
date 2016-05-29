@@ -1,3 +1,4 @@
+package connect4game;
 
 public class GameTools {
 	private int counter;
@@ -12,8 +13,7 @@ public class GameTools {
 				if (board.getBoardPositionValue(rowIndex, columnIndex) == player
 						.getCoinNumber()) {
 					++counter;
-				}
-				if (board.getBoardPositionValue(rowIndex, columnIndex) == 0) {
+				}else {
 					counter = 0;
 				}
 				if (counter >= 4) {
@@ -31,8 +31,7 @@ public class GameTools {
 				if (board.getBoardPositionValue(rowIndex, columnIndex) == player
 						.getCoinNumber()) {
 					++counter;
-				}
-				if (board.getBoardPositionValue(rowIndex, columnIndex) == 0) {
+				}else {
 					counter = 0;
 				}
 				if (counter >= 4) {
@@ -86,12 +85,8 @@ public class GameTools {
 	
 	public boolean isGameEnded(Board board, Player player){
 		if(board.hasReached4thColumn()){
-			if(checkVerticalWin(board, player)/*|| checkDiagonalWin(board, player)*/){
+			if(checkVerticalWin(board, player)|| checkDiagonalWin(board, player)){
 				System.out.println("vertical");
-				return true;
-			}
-			if(/*checkVerticalWin(board, player) ||*/ checkDiagonalWin(board, player)){
-				System.out.println("diagonal");
 				return true;
 			}
 		}

@@ -1,3 +1,4 @@
+package connect4game;
 public class Board {
 	private int row;
 	private int column;
