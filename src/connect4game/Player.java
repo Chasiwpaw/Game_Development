@@ -1,3 +1,4 @@
+package connect4game;
 import java.util.Scanner;
 
 public class Player {
@@ -6,13 +7,13 @@ public class Player {
 	private Scanner playerMove = null;
 	private String coinCoordinate;
 	
-	Player(String playerName, int coinNumber){
+	Player(String playerName, int coinNumber, Scanner playerMove){
 		this.playerName=playerName;
 		this.coinNumber=coinNumber;
-		this.playerMove = new Scanner(System.in);
+		this.playerMove = playerMove;
 	}
 	
-	public String getPlayerNumber(){
+	public String getPlayerName(){
 		return playerName;
 	}
 	
